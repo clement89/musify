@@ -1,0 +1,12 @@
+{
+    "continue_txt": "Continue",
+    "search": "Search",
+    "errorNetwork": "Network error. Please check your connection.",
+    "errorUnauthorized": "Unauthorized access.",
+    "errorNotFound": "Requested resource not found.",
+    "errorInvalidInput": "Invalid input provided.",
+    "errorTimeout": "Request timed out. Try again later.",
+    "errorUnexpected": "An unexpected error occurred.",
+    "errorGeneric": "Something went wrong. Please try again.",
+    "errorStorage": "Unable to read/write data."
+}

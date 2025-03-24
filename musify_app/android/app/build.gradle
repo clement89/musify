@@ -37,6 +37,21 @@ android {
             signingConfig = signingConfigs.debug
         }
     }
+    
+    flavorDimensions "app"
+    productFlavors {
+        Prod {
+            dimension "app"
+            applicationIdSuffix ""
+            resValue "string", "appName", "Musify"
+            // Add production-specific configurations here
+        }
+        Dev {
+            dimension "default"
+            applicationIdSuffix ".dev"
+            resValue "string", "appName", "Musify Dev"
+        }
+    }
 }
 
 flutter {
