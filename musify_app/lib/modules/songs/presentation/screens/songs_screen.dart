@@ -6,7 +6,9 @@ import 'package:musify_app/core/extentions/buildcontect_extention.dart';
 import 'package:musify_app/core/theme/app_text_style.dart';
 import 'package:musify_app/modules/songs/domain/entities/song.dart';
 import 'package:musify_app/modules/songs/presentation/bloc/songs_bloc.dart';
+import 'package:musify_app/modules/songs/presentation/widgets/song_tile.dart';
 import 'package:musify_app/widgets/snackbar/app_flash.dart';
+import 'package:badges/badges.dart' as badges;
 
 class SongsScreen extends StatefulWidget {
   const SongsScreen({super.key});
@@ -63,79 +65,56 @@ class _SongsScreenState extends State<SongsScreen> {
                 style: AppTextStyles.kTitle.copyWith(color: colors.textColor),
               ),
               actions: [
-                IconButton(
-                  icon: const Icon(Icons.refresh),
-                  onPressed: () {
-                    context.read<SongsBloc>().add(const RefreshSongs());
-                  },
-                ),
+                badges.Badge(
+                  position: badges.BadgePosition.topEnd(top: 0, end: 3),
+                  badgeContent: Text(
+                    state.cart.length.toString(),
+                    style: const TextStyle(color: Colors.white, fontSize: 12),
+                  ),
+                  showBadge: state.cart.isNotEmpty,
+                  child: IconButton(
+                    icon: const Icon(Icons.shopping_cart),
+                    onPressed: () {
+                      context.read<SongsBloc>().add(const OpenCart());
+                    },
+                  ),
+                )
               ],
             ),
             body: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  children: [
-                    SizedBox(height: 20.h),
-                    Expanded(
-                      child: state.status == Status.progress
-                          ? const Center(child: CircularProgressIndicator())
-                          : state.feed?.songs?.isNotEmpty == true
-                              ? ListView.separated(
-                                  itemCount: state.feed!.songs!.length,
-                                  separatorBuilder: (_, __) => const Divider(),
-                                  itemBuilder: (context, index) {
-                                    final Song song = state.feed!.songs![index];
-                                    final isPlaying =
-                                        state.status == Status.playing &&
-                                            state.currentSong == song;
-
-                                    return ListTile(
-                                      onTap: () {
-                                        context
-                                            .read<SongsBloc>()
-                                            .add(SelectSong(song));
-                                      },
-                                      leading: Image.network(
-                                        song.albumUrl,
-                                        width: 50.w,
-                                        height: 50.h,
-                                        fit: BoxFit.cover,
-                                      ),
-                                      title: Text(
-                                        song.title,
-                                        style: TextStyle(
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.bold,
-                                          color: colors.textColor,
-                                        ),
-                                      ),
-                                      subtitle: Text(
-                                        song.artist,
-                                        style: TextStyle(fontSize: 14.sp),
-                                      ),
-                                      trailing: IconButton(
-                                        icon: Icon(isPlaying
-                                            ? Icons.pause
-                                            : Icons.play_arrow),
-                                        onPressed: () {
-                                          context
-                                              .read<SongsBloc>()
-                                              .add(PlaySong(song));
-                                        },
-                                      ),
-                                    );
-                                  },
-                                )
-                              : Center(
-                                  child: Text(
-                                    localization.noSongsFound,
-                                    style: TextStyle(fontSize: 16.sp),
+                child: RefreshIndicator(
+                  onRefresh: () async {
+                    context.read<SongsBloc>().add(const RefreshSongs());
+                  },
+                  child: Column(
+                    children: [
+                      SizedBox(height: 20.h),
+                      Expanded(
+                        child: state.status == Status.progress
+                            ? const Center(child: CircularProgressIndicator())
+                            : state.feed?.songs?.isNotEmpty == true
+                                ? ListView.separated(
+                                    itemCount: state.feed!.songs!.length,
+                                    separatorBuilder: (_, __) =>
+                                        const Divider(),
+                                    itemBuilder: (context, index) {
+                                      final Song song =
+                                          state.feed!.songs![index];
+                                      return SongTile(song: song);
+                                    },
+                                  )
+                                : Center(
+                                    child: Text(
+                                      localization.noSongsFound,
+                                      style: TextStyle(fontSize: 16.sp),
+                                    ),
                                   ),
-                                ),
-                    ),
-                  ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

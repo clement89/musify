@@ -36,3 +36,16 @@ class SelectSong extends SongsEvent {
   @override
   List<Object> get props => [song];
 }
+
+class AddToCart extends SongsEvent {
+  final Song song;
+  const AddToCart(this.song);
+
+  @override
+  List<Object> get props => [song];
+}
+
+// Event to refresh the song list (if needed)
+class OpenCart extends SongsEvent {
+  const OpenCart();
+}

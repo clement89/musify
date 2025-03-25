@@ -10,5 +10,6 @@
     "errorGeneric": "Something went wrong. Please try again.",
     "errorStorage": "Unable to read/write data.",
     "title": "iTunes Store: Top Songs",
-    "noSongsFound": "No Songs Found"
+    "noSongsFound": "No Songs Found",
+    "cart": "Cart"
 }

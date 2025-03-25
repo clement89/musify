@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musify_app/core/di/injection_container.dart';
+import 'package:musify_app/modules/songs/presentation/screens/cart_screen.dart';
 import 'package:musify_app/modules/songs/presentation/screens/song_details_screen.dart';
 import 'package:musify_app/modules/songs/presentation/screens/songs_screen.dart';
 import 'package:musify_app/modules/splash/presentation/bloc/splash_bloc.dart';
@@ -29,7 +30,10 @@ class Routes {
         return _route(
           child: const SongDetailsScreen(),
         );
-
+      case AppRoutes.cartScreen:
+        return _route(
+          child: const CartScreen(),
+        );
       default:
         return _route(
           child: Scaffold(

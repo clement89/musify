@@ -23,8 +23,6 @@ class SongDetailsScreen extends StatelessWidget {
         }
 
         final song = state.selectedSong!;
-        final isPlaying =
-            state.status == Status.playing && state.currentSong == song;
 
         return Scaffold(
           appBar: AppBar(
@@ -58,12 +56,20 @@ class SongDetailsScreen extends StatelessWidget {
                   const SizedBox(height: 8),
 
                   // Artist Name
-                  Text(song.artist, style: textTheme.bodyMedium),
+                  Text(
+                    song.artist,
+                    style: AppTextStyles.kSubTitle
+                        .copyWith(color: colors.textColor),
+                  ),
                   const SizedBox(height: 8),
 
                   // Album Name
                   if (song.album.isNotEmpty)
-                    Text("Album: ${song.album}", style: textTheme.bodySmall),
+                    Text(
+                      "Album: ${song.album}",
+                      style: AppTextStyles.kSubTitle
+                          .copyWith(color: colors.textColor),
+                    ),
                   const SizedBox(height: 20),
 
                   // Audio Progress Bar (visible only when playing)
