@@ -1,3 +1,10 @@
+
+<img width="317" alt="Screenshot 2025-03-25 at 11 52 52 PM" src="https://github.com/user-attachments/assets/5ed17190-61de-4530-b814-be030810c5b5" />  
+
+<img width="317" alt="Screenshot 2025-03-26 at 12 00 50 AM" src="https://github.com/user-attachments/assets/f164c29e-20ee-49d3-bdfc-0b6bcf81047d" />
+
+<img width="317" alt="Screenshot 2025-03-26 at 12 01 53 AM" src="https://github.com/user-attachments/assets/50fe0eba-54f9-4536-b01a-28aee3998678" />
+
 # Musify App
 
 ## Overview
