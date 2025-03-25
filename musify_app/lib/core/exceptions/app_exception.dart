@@ -14,6 +14,7 @@ class AppException implements Exception {
   static AppException timeout() => AppException(code: "TIMEOUT");
   static AppException unexpected() => AppException(code: "UNEXPECTED_ERROR");
   static AppException storageError() => AppException(code: "STORAGE_ERROR");
+  static AppException notFound() => AppException(code: "NOT_FOUND_ERROR");
 
   static String getCoreErrorMessage(BuildContext context, String code) {
     switch (code) {
@@ -25,6 +26,8 @@ class AppException implements Exception {
         return context.loc.errorUnexpected;
       case "STORAGE_ERROR":
         return context.loc.errorStorage;
+      case "NOT_FOUND_ERROR":
+        return context.loc.errorNotFound;
       default:
         return context.loc.errorGeneric;
     }

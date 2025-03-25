@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musify_app/core/di/injection_container.dart';
-import 'package:musify_app/modules/splash/bloc/splash_bloc.dart';
+import 'package:musify_app/modules/splash/presentation/bloc/splash_bloc.dart';
 import 'package:musify_app/modules/splash/presentation/splash_screen.dart';
 import 'package:musify_app/modules/splash/presentation/welcome_screen.dart';
 import 'package:musify_app/routes/app_routes.dart';
