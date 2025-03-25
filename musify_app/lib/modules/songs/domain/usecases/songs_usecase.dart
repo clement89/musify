@@ -14,7 +14,7 @@ class SongsUseCase {
     try {
       return await _repository.fetchFeed();
     } catch (e) {
-      throw AppException.unexpected();
+      throw AppException.unexpected;
     }
   }
 
@@ -23,7 +23,7 @@ class SongsUseCase {
     try {
       await _audioService.play(song.previewUrl);
     } catch (e) {
-      throw AppException.unexpected();
+      throw AppException.unexpected;
     }
   }
 
@@ -32,7 +32,7 @@ class SongsUseCase {
     try {
       await _audioService.pause();
     } catch (e) {
-      throw AppException.unexpected();
+      throw AppException.unexpected;
     }
   }
 }

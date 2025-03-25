@@ -24,12 +24,12 @@ class ApiServiceImpl implements ApiService {
       } else if (response.data is Map<String, dynamic>) {
         return response.data;
       } else {
-        throw AppException.unexpected();
+        throw AppException.unexpected;
       }
     } on DioException catch (e) {
       throw _handleDioException(e);
     } catch (e) {
-      throw AppException.unexpected();
+      throw AppException.unexpected;
     }
   }
 
@@ -43,7 +43,7 @@ class ApiServiceImpl implements ApiService {
     } on DioException catch (e) {
       throw _handleDioException(e);
     } catch (e) {
-      throw AppException.unexpected();
+      throw AppException.unexpected;
     }
   }
 
@@ -53,15 +53,15 @@ class ApiServiceImpl implements ApiService {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.receiveTimeout:
       case DioExceptionType.sendTimeout:
-        return AppException.timeout();
+        return AppException.timeout;
       case DioExceptionType.badResponse:
-        return AppException.notFound();
+        return AppException.notFound;
       case DioExceptionType.cancel:
-        return AppException.unexpected();
+        return AppException.unexpected;
       case DioExceptionType.connectionError:
-        return AppException.networkError();
+        return AppException.networkError;
       default:
-        return AppException.unexpected();
+        return AppException.unexpected;
     }
   }
 }

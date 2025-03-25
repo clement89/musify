@@ -1,20 +1,24 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:musify_app/core/extentions/buildcontect_extention.dart';
 
-class AppException implements Exception {
+class AppException extends Equatable implements Exception {
   final String code;
 
-  AppException({required this.code});
+  const AppException({required this.code});
+
+  @override
+  List<Object> get props => [code];
 
   @override
   String toString() => '[$code]';
 
   /// Core errors
-  static AppException networkError() => AppException(code: "NETWORK_ERROR");
-  static AppException timeout() => AppException(code: "TIMEOUT");
-  static AppException unexpected() => AppException(code: "UNEXPECTED_ERROR");
-  static AppException storageError() => AppException(code: "STORAGE_ERROR");
-  static AppException notFound() => AppException(code: "NOT_FOUND_ERROR");
+  static const AppException networkError = AppException(code: "NETWORK_ERROR");
+  static const AppException timeout = AppException(code: "TIMEOUT");
+  static const AppException unexpected = AppException(code: "UNEXPECTED_ERROR");
+  static const AppException storageError = AppException(code: "STORAGE_ERROR");
+  static const AppException notFound = AppException(code: "NOT_FOUND_ERROR");
 
   static String getCoreErrorMessage(BuildContext context, String? code) {
     switch (code) {

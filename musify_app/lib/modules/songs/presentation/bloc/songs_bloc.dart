@@ -35,8 +35,8 @@ class SongsBloc extends Bloc<SongsEvent, SongsState> {
     } on AppException catch (e) {
       emit(state.copyWith(status: Status.error, error: e));
     } catch (_) {
-      emit(state.copyWith(
-          status: Status.error, error: AppException.unexpected()));
+      emit(
+          state.copyWith(status: Status.error, error: AppException.unexpected));
     }
   }
 
@@ -50,8 +50,8 @@ class SongsBloc extends Bloc<SongsEvent, SongsState> {
     } on AppException catch (e) {
       emit(state.copyWith(status: Status.error, error: e));
     } catch (_) {
-      emit(state.copyWith(
-          status: Status.error, error: AppException.unexpected()));
+      emit(
+          state.copyWith(status: Status.error, error: AppException.unexpected));
     }
   }
 
