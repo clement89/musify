@@ -6,18 +6,22 @@ import 'package:musify_app/core/exceptions/app_exception.dart';
 import 'package:musify_app/modules/songs/domain/entities/feed.dart';
 import 'package:musify_app/modules/songs/domain/entities/song.dart';
 import 'package:musify_app/modules/songs/domain/usecases/songs_usecase.dart';
+import 'package:musify_app/routes/app_routes.dart';
+import 'package:musify_app/services/navigation/navigation_service.dart';
 
 part 'songs_event.dart';
 part 'songs_state.dart';
 
 class SongsBloc extends Bloc<SongsEvent, SongsState> {
   final SongsUseCase useCase;
+  final NavigationService navigationService;
 
-  SongsBloc({required this.useCase}) : super(SongsState.initial()) {
+  SongsBloc({required this.useCase, required this.navigationService})
+      : super(SongsState.initial()) {
     on<FetchSongs>(_onFetchSongs);
     on<RefreshSongs>(_onRefreshSongs);
     on<PlaySong>(_onPlaySong);
-    on<PauseSong>(_onPauseSong);
+    on<SelectSong>(_onSelectSong);
   }
 
   Future<void> _onFetchSongs(FetchSongs event, Emitter<SongsState> emit) async {
@@ -64,13 +68,8 @@ class SongsBloc extends Bloc<SongsEvent, SongsState> {
     }
   }
 
-  /// Handle pausing a song
-  Future<void> _onPauseSong(PauseSong event, Emitter<SongsState> emit) async {
-    try {
-      useCase.pauseSong();
-      emit(state.copyWith(status: Status.paused));
-    } on AppException catch (e) {
-      emit(state.copyWith(status: Status.error, error: e));
-    }
+  void _onSelectSong(SelectSong event, Emitter<SongsState> emit) {
+    emit(state.copyWith(selectedSong: event.song));
+    navigationService.navigateToNamed(AppRoutes.songDetailsScreen);
   }
 }

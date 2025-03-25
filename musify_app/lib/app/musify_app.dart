@@ -29,6 +29,7 @@ class MusifyApp extends StatelessWidget {
             BlocProvider<SongsBloc>(
               create: (_) => SongsBloc(
                 useCase: locator<SongsUseCase>(),
+                navigationService: locator<NavigationService>(),
               ),
             ),
 

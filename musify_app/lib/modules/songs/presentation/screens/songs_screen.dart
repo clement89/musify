@@ -60,8 +60,7 @@ class _SongsScreenState extends State<SongsScreen> {
             appBar: AppBar(
               title: Text(
                 localization.title,
-                style: AppTextStyles.loginScreenTitle
-                    .copyWith(color: colors.textColor),
+                style: AppTextStyles.kTitle.copyWith(color: colors.textColor),
               ),
               actions: [
                 IconButton(
@@ -93,6 +92,11 @@ class _SongsScreenState extends State<SongsScreen> {
                                             state.currentSong == song;
 
                                     return ListTile(
+                                      onTap: () {
+                                        context
+                                            .read<SongsBloc>()
+                                            .add(SelectSong(song));
+                                      },
                                       leading: Image.network(
                                         song.albumUrl,
                                         width: 50.w,

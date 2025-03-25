@@ -28,7 +28,11 @@ class PlaySong extends SongsEvent {
   List<Object?> get props => [song];
 }
 
-/// Pause song event
-class PauseSong extends SongsEvent {
-  const PauseSong();
+class SelectSong extends SongsEvent {
+  final Song song;
+
+  const SelectSong(this.song);
+
+  @override
+  List<Object> get props => [song];
 }

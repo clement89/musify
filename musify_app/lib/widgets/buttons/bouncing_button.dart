@@ -53,7 +53,7 @@ class BouncingButton extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 30.sp),
               child: Text(
                 title,
-                style: AppTextStyles.buttonTitle.copyWith(color: colors.white),
+                style: AppTextStyles.kButtonTitle.copyWith(color: colors.white),
               ),
             ),
           ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musify_app/core/di/injection_container.dart';
+import 'package:musify_app/modules/songs/presentation/screens/song_details_screen.dart';
 import 'package:musify_app/modules/songs/presentation/screens/songs_screen.dart';
 import 'package:musify_app/modules/splash/presentation/bloc/splash_bloc.dart';
 import 'package:musify_app/modules/splash/presentation/splash_screen.dart';
-import 'package:musify_app/modules/splash/presentation/welcome_screen.dart';
 import 'package:musify_app/routes/app_routes.dart';
 import 'package:musify_app/services/navigation/navigation_service.dart';
 import 'package:musify_app/services/storage/storage_service.dart';
@@ -24,6 +24,10 @@ class Routes {
       case AppRoutes.songsScreen:
         return _route(
           child: const SongsScreen(),
+        );
+      case AppRoutes.songDetailsScreen:
+        return _route(
+          child: const SongDetailsScreen(),
         );
 
       default:
