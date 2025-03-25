@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:musify_app/core/exceptions/app_exception.dart';
 import 'package:musify_app/services/api/api_service.dart';
@@ -16,7 +18,14 @@ class ApiServiceImpl implements ApiService {
       {Map<String, String>? queryParams}) async {
     try {
       final response = await _dio.get(endpoint, queryParameters: queryParams);
-      return response.data;
+      // Ensure response.data is a Map<String, dynamic>
+      if (response.data is String) {
+        return jsonDecode(response.data) as Map<String, dynamic>;
+      } else if (response.data is Map<String, dynamic>) {
+        return response.data;
+      } else {
+        throw AppException.unexpected();
+      }
     } on DioException catch (e) {
       throw _handleDioException(e);
     } catch (e) {

@@ -26,7 +26,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
           milliseconds: 1000,
         ), () {
       navigationService.navigateToAndRemoveUntil(
-          AppRoutes.welcomeScreen, (p0) => false);
+          AppRoutes.songsScreen, (p0) => false);
     });
   }
 }

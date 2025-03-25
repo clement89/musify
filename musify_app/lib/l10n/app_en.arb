@@ -8,5 +8,7 @@
     "errorTimeout": "Request timed out. Try again later.",
     "errorUnexpected": "An unexpected error occurred.",
     "errorGeneric": "Something went wrong. Please try again.",
-    "errorStorage": "Unable to read/write data."
+    "errorStorage": "Unable to read/write data.",
+    "title": "iTunes Store: Top Songs",
+    "noSongsFound": "No Songs Found"
 }

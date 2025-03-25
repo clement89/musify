@@ -16,7 +16,7 @@ class AppException implements Exception {
   static AppException storageError() => AppException(code: "STORAGE_ERROR");
   static AppException notFound() => AppException(code: "NOT_FOUND_ERROR");
 
-  static String getCoreErrorMessage(BuildContext context, String code) {
+  static String getCoreErrorMessage(BuildContext context, String? code) {
     switch (code) {
       case "NETWORK_ERROR":
         return context.loc.errorNetwork;

@@ -35,6 +35,28 @@ class FeedModel extends Feed {
     );
   }
 
+  factory FeedModel.fromMapCache(Map<String, dynamic> map) {
+    return FeedModel(
+      authorName: map["authorName"],
+      authorUri: map["authorUri"],
+      songs: (map["songs"] as List<dynamic>?)
+          ?.map((e) {
+            if (e != null) {
+              return SongModel.fromMapCache(e);
+            }
+            return null;
+          })
+          .whereType<SongModel>()
+          .toList(), // Ensures only non-null SongModel objects are included
+      updated: map["updated"],
+      rights: map["rights"],
+      title: map["title"],
+      iconUrl: map["iconUrl"],
+      id: map["id"],
+      link: map["link"],
+    );
+  }
+
   Map<String, dynamic> toMap() {
     return {
       "authorName": authorName,

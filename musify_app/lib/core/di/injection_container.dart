@@ -3,9 +3,11 @@ import 'package:musify_app/modules/songs/data/datasources/song_local_data_source
 import 'package:musify_app/modules/songs/data/datasources/song_remote_data_source.dart';
 import 'package:musify_app/modules/songs/data/repositories/song_repository_impl.dart';
 import 'package:musify_app/modules/songs/domain/repositories/song_repository.dart';
-import 'package:musify_app/modules/songs/domain/usecases/fetch_feed.dart';
+import 'package:musify_app/modules/songs/domain/usecases/songs_usecase.dart';
 import 'package:musify_app/services/api/api_service.dart';
 import 'package:musify_app/services/api/api_service_impl.dart';
+import 'package:musify_app/services/audio/audio_service.dart';
+import 'package:musify_app/services/audio/audio_service_impl.dart';
 import 'package:musify_app/services/logs/logs_service.dart';
 import 'package:musify_app/services/logs/logs_service_impl.dart';
 import 'package:musify_app/services/navigation/navigation_service.dart';
@@ -22,6 +24,7 @@ Future<void> setUpLocator() async {
   locator
       .registerLazySingleton<NavigationService>(() => NavigationServiceImpl());
   locator.registerLazySingleton<LogService>(() => LogServiceImpl());
+  locator.registerLazySingleton<AudioService>(() => AudioServiceImpl());
 
   // Data Sources
   locator.registerLazySingleton<SongRemoteDataSource>(
@@ -34,6 +37,6 @@ Future<void> setUpLocator() async {
       locator<SongRemoteDataSource>(), locator<SongLocalDataSource>()));
 
   // Use Cases
-  locator.registerLazySingleton<FetchFeed>(
-      () => FetchFeed(locator<SongRepository>()));
+  locator.registerLazySingleton<SongsUseCase>(
+      () => SongsUseCase(locator<SongRepository>(), locator<AudioService>()));
 }

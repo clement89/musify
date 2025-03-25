@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musify_app/core/di/injection_container.dart';
+import 'package:musify_app/modules/songs/presentation/screens/songs_screen.dart';
 import 'package:musify_app/modules/splash/presentation/bloc/splash_bloc.dart';
 import 'package:musify_app/modules/splash/presentation/splash_screen.dart';
 import 'package:musify_app/modules/splash/presentation/welcome_screen.dart';
@@ -20,9 +21,9 @@ class Routes {
           )..add(SplashStarted()),
           settings: settings,
         );
-      case AppRoutes.welcomeScreen:
+      case AppRoutes.songsScreen:
         return _route(
-          child: const WelcomeScreen(),
+          child: const SongsScreen(),
         );
 
       default:

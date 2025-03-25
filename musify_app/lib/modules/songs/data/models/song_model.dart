@@ -31,6 +31,23 @@ class SongModel extends Song {
     );
   }
 
+  /// Factory method to handle cached JSON data
+  factory SongModel.fromMapCache(Map<String, dynamic> map) {
+    return SongModel(
+      id: map["id"] ?? '',
+      title: map["title"] ?? '',
+      artist: map["artist"] ?? '',
+      album: map["album"] ?? '',
+      albumUrl: map["albumUrl"] ?? '',
+      songUrl: map["songUrl"] ?? '',
+      previewUrl: map["previewUrl"] ?? '',
+      category: map["category"] ?? '',
+      releaseDate: map["releaseDate"] ?? '',
+      price: map["price"] ?? '',
+      rights: map["rights"] ?? '',
+    );
+  }
+
   /// Nullable factory method to safely handle parsing failures
   static SongModel? tryFromMap(Map<String, dynamic> map) {
     try {

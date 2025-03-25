@@ -6,6 +6,8 @@ import 'package:musify_app/core/constants/app_constants.dart';
 import 'package:musify_app/core/di/injection_container.dart';
 import 'package:musify_app/core/theme/cubit/theme_cubit.dart';
 import 'package:musify_app/core/theme/theme.dart';
+import 'package:musify_app/modules/songs/domain/usecases/songs_usecase.dart';
+import 'package:musify_app/modules/songs/presentation/bloc/songs_bloc.dart';
 import 'package:musify_app/routes/app_routes.dart';
 import 'package:musify_app/routes/routes.dart';
 import 'package:musify_app/services/navigation/navigation_service.dart';
@@ -23,6 +25,11 @@ class MusifyApp extends StatelessWidget {
           providers: [
             BlocProvider<ThemeCubit>(
               create: (_) => ThemeCubit(),
+            ),
+            BlocProvider<SongsBloc>(
+              create: (_) => SongsBloc(
+                useCase: locator<SongsUseCase>(),
+              ),
             ),
 
             // Add other BlocProviders here if needed

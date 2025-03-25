@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:musify_app/modules/songs/data/datasources/song_data_source.dart';
 import 'package:musify_app/modules/songs/data/models/feed_model.dart';
 import 'package:musify_app/services/storage/storage_service.dart';
@@ -13,11 +14,12 @@ class SongLocalDataSource implements SongDataSource {
     try {
       final cachedData = await _storageService.get(_cacheKey);
       if (cachedData != null) {
-        return FeedModel.fromMap(cachedData);
+        return FeedModel.fromMapCache(cachedData);
       }
       return null;
     } catch (e) {
-      rethrow;
+      debugPrint('Error - $e');
+      return null;
     }
   }
 
