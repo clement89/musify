@@ -6,7 +6,9 @@ import 'package:musify_app/core/extentions/buildcontect_extention.dart';
 import 'package:musify_app/core/theme/app_text_style.dart';
 import 'package:musify_app/modules/songs/domain/entities/song.dart';
 import 'package:musify_app/modules/songs/presentation/bloc/songs_bloc.dart';
+import 'package:musify_app/modules/songs/presentation/widgets/cart_summery.dart';
 import 'package:musify_app/modules/songs/presentation/widgets/song_tile.dart';
+import 'package:musify_app/widgets/buttons/bouncing_button.dart';
 import 'package:musify_app/widgets/snackbar/app_flash.dart';
 
 class CartScreen extends StatefulWidget {
@@ -17,17 +19,6 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  @override
-  void initState() {
-    super.initState();
-    // Request focus when the widget is built
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     final colors = context.customTheme;
@@ -55,6 +46,23 @@ class _CartScreenState extends State<CartScreen> {
                 style: AppTextStyles.kTitle.copyWith(color: colors.textColor),
               ),
             ),
+            bottomNavigationBar: SafeArea(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  BouncingButton(
+                    onPressed: () {
+                      showDialog<bool>(
+                        context: context,
+                        builder: (context) => CartSummary(
+                            cart: context.read<SongsBloc>().state.cart),
+                      );
+                    },
+                    title: localization.checkout,
+                  ),
+                ],
+              ),
+            ),
             body: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
               child: Padding(
@@ -65,7 +73,7 @@ class _CartScreenState extends State<CartScreen> {
                     Expanded(
                       child: state.status == Status.progress
                           ? const Center(child: CircularProgressIndicator())
-                          : state.cart.isNotEmpty == true
+                          : state.cart.isNotEmpty
                               ? ListView.separated(
                                   itemCount: state.cart.length,
                                   separatorBuilder: (_, __) => const Divider(),

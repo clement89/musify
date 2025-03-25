@@ -24,6 +24,7 @@ class SongsBloc extends Bloc<SongsEvent, SongsState> {
     on<SelectSong>(_onSelectSong);
     on<AddToCart>(_onAddToCart);
     on<OpenCart>(_openCart);
+    on<Clearcart>(_clearCart);
   }
 
   Future<void> _onFetchSongs(FetchSongs event, Emitter<SongsState> emit) async {
@@ -89,5 +90,10 @@ class SongsBloc extends Bloc<SongsEvent, SongsState> {
 
   void _openCart(OpenCart event, Emitter<SongsState> emit) {
     navigationService.navigateToNamed(AppRoutes.cartScreen);
+  }
+
+  void _clearCart(Clearcart event, Emitter<SongsState> emit) {
+    navigationService.back();
+    emit(state.copyWith(cart: []));
   }
 }

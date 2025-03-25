@@ -1,5 +1,4 @@
 {
-    "continue_txt": "Continue",
     "search": "Search",
     "errorNetwork": "Network error. Please check your connection.",
     "errorUnauthorized": "Unauthorized access.",
@@ -11,5 +10,9 @@
     "errorStorage": "Unable to read/write data.",
     "title": "iTunes Store: Top Songs",
     "noSongsFound": "No Songs Found",
-    "cart": "Cart"
+    "cart": "Cart",
+    "cartSummery": "Cart Summary",
+    "cancel": "Cancel",
+    "done": "Done",
+    "checkout": "Checkout"
 }

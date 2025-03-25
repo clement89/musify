@@ -49,3 +49,7 @@ class AddToCart extends SongsEvent {
 class OpenCart extends SongsEvent {
   const OpenCart();
 }
+
+class Clearcart extends SongsEvent {
+  const Clearcart();
+}
