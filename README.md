@@ -108,5 +108,4 @@ group('SongsBloc Tests', () {
 ## Conclusion
 Musify is designed with **Clean Architecture**, **Bloc for state management**, and **dependency injection** for scalability. With **secure local storage**, **centralized error handling**, and **extensive testing**, the app is optimized for performance and maintainability.
 
-Happy Coding! 🎵🚀
 
