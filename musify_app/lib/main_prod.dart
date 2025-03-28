@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:musify_app/app/musify_app.dart';
 import 'package:musify_app/core/di/injection_container.dart';
 
@@ -29,6 +30,12 @@ void main() async {
         DeviceOrientation.portraitUp,
         DeviceOrientation.portraitDown,
       ]);
+
+      await JustAudioBackground.init(
+        androidNotificationChannelId: 'com.example.musify_app.channel.audio',
+        androidNotificationChannelName: 'Audio playback',
+        androidNotificationOngoing: true,
+      );
 
       runApp(const MusifyApp());
     },
