@@ -49,8 +49,6 @@ dependencies:
   badges: ^3.1.2
   mocktail: ^1.0.4
   bloc_test: ^10.0.0
-  just_audio_background: ^0.0.1-beta.15
-  audio_service: ^0.18.17
   
 
 dev_dependencies:

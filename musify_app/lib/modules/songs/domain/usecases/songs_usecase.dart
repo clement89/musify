@@ -21,7 +21,7 @@ class SongsUseCase {
   /// Play the selected song
   Future<void> playSong(Song song) async {
     try {
-      await _audioService.play(song);
+      await _audioService.play(song.previewUrl);
     } catch (e) {
       throw AppException.unexpected;
     }
