@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:musify_app/core/exceptions/app_exception.dart';
 import 'package:musify_app/modules/songs/data/datasources/song_data_source.dart';
 import 'package:musify_app/modules/songs/data/models/feed_model.dart';
 import 'package:musify_app/services/storage/storage_service.dart';
@@ -19,7 +20,7 @@ class SongLocalDataSource implements SongDataSource {
       return null;
     } catch (e) {
       debugPrint('Error - $e');
-      return null;
+      throw AppException.storageError;
     }
   }
 
@@ -27,7 +28,8 @@ class SongLocalDataSource implements SongDataSource {
     try {
       await _storageService.save(_cacheKey, feed.toMap());
     } catch (e) {
-      rethrow;
+      debugPrint('Error - $e');
+      throw AppException.storageError;
     }
   }
 
@@ -35,7 +37,8 @@ class SongLocalDataSource implements SongDataSource {
     try {
       await _storageService.delete(_cacheKey);
     } catch (e) {
-      rethrow;
+      debugPrint('Error - $e');
+      throw AppException.storageError;
     }
   }
 }

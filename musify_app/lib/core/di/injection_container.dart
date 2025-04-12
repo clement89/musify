@@ -1,4 +1,9 @@
 import 'package:get_it/get_it.dart';
+import 'package:musify_app/modules/cart/data/datasources/cart_data_source.dart';
+import 'package:musify_app/modules/cart/data/datasources/cart_local_data_source.dart';
+import 'package:musify_app/modules/cart/data/repository/cart_repo_impl.dart';
+import 'package:musify_app/modules/cart/domain/repository/cart_repo.dart';
+import 'package:musify_app/modules/cart/domain/usecases/cart_usecases.dart';
 import 'package:musify_app/modules/songs/data/datasources/song_local_data_source.dart';
 import 'package:musify_app/modules/songs/data/datasources/song_remote_data_source.dart';
 import 'package:musify_app/modules/songs/data/repositories/song_repository_impl.dart';
@@ -31,6 +36,15 @@ Future<void> setUpLocator() async {
       () => SongRemoteDataSource(locator<ApiService>()));
   locator.registerLazySingleton<SongLocalDataSource>(
       () => SongLocalDataSource(locator<StorageService>()));
+
+  locator.registerLazySingleton<CartDataSource>(
+      () => CartLocalDataSource(locator<StorageService>()));
+
+  locator.registerLazySingleton<CartRepository>(
+      () => CartRepoImpl(locator<CartDataSource>()));
+
+  locator.registerLazySingleton<CartUsecases>(
+      () => CartUsecases(locator<CartRepository>()));
 
   // Repository
   locator.registerLazySingleton<SongRepository>(() => SongRepositoryImpl(

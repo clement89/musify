@@ -6,6 +6,7 @@ import 'package:musify_app/core/extentions/buildcontect_extention.dart';
 import 'package:musify_app/core/theme/app_text_style.dart';
 import 'package:musify_app/modules/songs/domain/entities/song.dart';
 import 'package:musify_app/modules/songs/presentation/bloc/songs_bloc.dart';
+import 'package:musify_app/modules/cart/presentation/widgets/cart_icon.dart';
 import 'package:musify_app/modules/songs/presentation/widgets/song_tile.dart';
 import 'package:musify_app/widgets/snackbar/app_flash.dart';
 import 'package:badges/badges.dart' as badges;
@@ -64,21 +65,8 @@ class _SongsScreenState extends State<SongsScreen> {
                 localization.title,
                 style: AppTextStyles.kTitle.copyWith(color: colors.textColor),
               ),
-              actions: [
-                badges.Badge(
-                  position: badges.BadgePosition.topEnd(top: 0, end: 3),
-                  badgeContent: Text(
-                    state.cart.length.toString(),
-                    style: const TextStyle(color: Colors.white, fontSize: 12),
-                  ),
-                  showBadge: state.cart.isNotEmpty,
-                  child: IconButton(
-                    icon: const Icon(Icons.shopping_cart),
-                    onPressed: () {
-                      context.read<SongsBloc>().add(const OpenCart());
-                    },
-                  ),
-                )
+              actions: const [
+                CartIcon(),
               ],
             ),
             body: GestureDetector(

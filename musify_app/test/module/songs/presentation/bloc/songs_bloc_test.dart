@@ -121,25 +121,6 @@ void main() {
     );
 
     blocTest<SongsBloc, SongsState>(
-      'adds song to cart when AddToCart is called',
-      build: () => songsBloc,
-      act: (bloc) => bloc.add(const AddToCart(mockSong)),
-      expect: () => [
-        SongsState.initial().copyWith(cart: [mockSong]),
-      ],
-    );
-
-    blocTest<SongsBloc, SongsState>(
-      'removes song from cart when AddToCart is called with an existing song',
-      build: () => songsBloc,
-      seed: () => SongsState.initial().copyWith(cart: [mockSong]),
-      act: (bloc) => bloc.add(const AddToCart(mockSong)),
-      expect: () => [
-        SongsState.initial().copyWith(cart: []),
-      ],
-    );
-
-    blocTest<SongsBloc, SongsState>(
       'navigates to cart screen when OpenCart is called',
       build: () => songsBloc,
       act: (bloc) => bloc.add(const OpenCart()),

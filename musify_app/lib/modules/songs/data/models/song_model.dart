@@ -48,6 +48,22 @@ class SongModel extends Song {
     );
   }
 
+  factory SongModel.fromEntity(Song entity) {
+    return SongModel(
+      id: entity.id,
+      title: entity.title,
+      artist: entity.artist,
+      album: entity.album,
+      albumUrl: entity.albumUrl,
+      songUrl: entity.songUrl,
+      previewUrl: entity.previewUrl,
+      category: entity.category,
+      releaseDate: entity.releaseDate,
+      price: entity.price,
+      rights: entity.rights,
+    );
+  }
+
   /// Nullable factory method to safely handle parsing failures
   static SongModel? tryFromMap(Map<String, dynamic> map) {
     try {

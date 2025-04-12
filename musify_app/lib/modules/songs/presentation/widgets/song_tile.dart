@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:musify_app/core/extentions/buildcontect_extention.dart';
+import 'package:musify_app/modules/cart/presentation/bloc/cart_bloc.dart';
 import 'package:musify_app/modules/songs/domain/entities/song.dart';
 import 'package:musify_app/modules/songs/presentation/bloc/songs_bloc.dart';
 
@@ -59,7 +60,7 @@ class SongTile extends StatelessWidget {
               IconButton(
                 icon: Icon(isInCart ? Icons.remove : Icons.add),
                 onPressed: () {
-                  context.read<SongsBloc>().add(AddToCart(song));
+                  context.read<CartBloc>().add(AddToCart(song: song));
                 },
               ),
             ],
