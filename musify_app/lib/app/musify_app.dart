@@ -41,7 +41,7 @@ class MusifyApp extends StatelessWidget {
             BlocProvider<CartBloc>(
               create: (_) => CartBloc(
                 cartUsecases: locator<CartUsecases>(),
-              ),
+              )..add(const LoadCart()),
             ),
             // Add other BlocProviders here if needed
           ],

@@ -7,7 +7,6 @@ class SongsState extends Equatable {
   final AppException? error;
   final Song? currentSong;
   final Song? selectedSong;
-  final List<Song> cart;
 
   const SongsState({
     required this.feed,
@@ -15,12 +14,10 @@ class SongsState extends Equatable {
     required this.error,
     required this.currentSong,
     required this.selectedSong,
-    required this.cart,
   });
 
   @override
-  List<Object?> get props =>
-      [status, feed, error, currentSong, selectedSong, cart];
+  List<Object?> get props => [status, feed, error, currentSong, selectedSong];
 
 // Factory method for the initial state
   factory SongsState.initial() {
@@ -30,7 +27,6 @@ class SongsState extends Equatable {
       error: null,
       currentSong: null,
       selectedSong: null,
-      cart: [],
     );
   }
 
@@ -48,7 +44,6 @@ class SongsState extends Equatable {
       error: error ?? this.error,
       currentSong: currentSong ?? this.currentSong,
       selectedSong: selectedSong ?? this.selectedSong,
-      cart: cart ?? this.cart,
     );
   }
 }

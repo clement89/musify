@@ -23,51 +23,63 @@ class SongTile extends StatelessWidget {
       builder: (context, state) {
         final isPlaying =
             state.status == Status.playing && state.currentSong == song;
-        final isInCart = state.cart.contains(song); // Check if in cart
 
-        return ListTile(
-          onTap: () {
-            context.read<SongsBloc>().add(SelectSong(song));
-            context.push(AppRoutes.songDetailsScreen);
+        return BlocBuilder<CartBloc, CartState>(
+          builder: (context, cartState) {
+            final isInCart =
+                cartState.cart.items.contains(song); // Check if in cart
+
+            return ListTile(
+              onTap: () {
+                context.read<SongsBloc>().add(SelectSong(song));
+                context.push(AppRoutes.songDetailsScreen);
+              },
+              leading: Image.network(
+                song.albumUrl,
+                width: 50.w,
+                height: 50.h,
+                fit: BoxFit.cover,
+              ),
+              title: Text(
+                song.title,
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.bold,
+                  color: colors.textColor,
+                ),
+              ),
+              subtitle: Text(
+                song.artist,
+                style: TextStyle(fontSize: 14.sp),
+              ),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Play/Pause Button
+                  IconButton(
+                    icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
+                    onPressed: () {
+                      context.read<SongsBloc>().add(PlaySong(song));
+                    },
+                  ),
+
+                  // Cart Button (+ to add, - to remove)
+                  IconButton(
+                    icon: Icon(isInCart ? Icons.remove : Icons.add),
+                    onPressed: () {
+                      if (isInCart) {
+                        context
+                            .read<CartBloc>()
+                            .add(RemoveFromCart(song: song));
+                      } else {
+                        context.read<CartBloc>().add(AddToCart(song: song));
+                      }
+                    },
+                  ),
+                ],
+              ),
+            );
           },
-          leading: Image.network(
-            song.albumUrl,
-            width: 50.w,
-            height: 50.h,
-            fit: BoxFit.cover,
-          ),
-          title: Text(
-            song.title,
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.bold,
-              color: colors.textColor,
-            ),
-          ),
-          subtitle: Text(
-            song.artist,
-            style: TextStyle(fontSize: 14.sp),
-          ),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Play/Pause Button
-              IconButton(
-                icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
-                onPressed: () {
-                  context.read<SongsBloc>().add(PlaySong(song));
-                },
-              ),
-
-              // Cart Button (+ to add, - to remove)
-              IconButton(
-                icon: Icon(isInCart ? Icons.remove : Icons.add),
-                onPressed: () {
-                  context.read<CartBloc>().add(AddToCart(song: song));
-                },
-              ),
-            ],
-          ),
         );
       },
     );

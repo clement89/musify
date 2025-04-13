@@ -1,6 +1,5 @@
 import 'package:musify_app/modules/cart/domain/entities/cart.dart';
 import 'package:musify_app/modules/cart/domain/repository/cart_repo.dart';
-import 'package:musify_app/modules/songs/domain/entities/song.dart';
 
 class CartUsecases {
   final CartRepository _repository;
@@ -12,8 +11,7 @@ class CartUsecases {
   }
 
   /// Updates the cart with the provided list of songs.
-  void updateCart({required List<Song> songs}) {
-    final cart = Cart(items: songs);
+  void updateCart({required Cart cart}) {
     _repository.updateCartRepo(cart: cart);
   }
 }

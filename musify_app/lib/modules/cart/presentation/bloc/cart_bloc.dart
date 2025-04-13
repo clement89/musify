@@ -16,16 +16,16 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     on<RemoveFromCart>(_removeFromCart);
   }
 
-  void _loadCart(LoadCart event, Emitter<CartState> emit) {
-    // Load the cart from a data source (e.g., local storage, API)
-    // For now, we'll just use the initial state
-    emit(state.copyWith(cart: state.cart));
+  void _loadCart(LoadCart event, Emitter<CartState> emit) async {
+    Cart cart = await cartUsecases.fetchCartItems();
+    emit(state.copyWith(cart: cart));
   }
 
   void _addToCart(AddToCart event, Emitter<CartState> emit) {
     final updatedCart = state.cart.copyWith(
       items: List.from(state.cart.items)..add(event.song),
     );
+    cartUsecases.updateCart(cart: updatedCart);
     emit(state.copyWith(cart: updatedCart));
   }
 
@@ -33,6 +33,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     final updatedCart = state.cart.copyWith(
       items: List.from(state.cart.items)..remove(event.song),
     );
+    cartUsecases.updateCart(cart: updatedCart);
     emit(state.copyWith(cart: updatedCart));
   }
 }

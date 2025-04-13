@@ -10,7 +10,7 @@ class CartModel extends Cart {
   factory CartModel.fromJson(Map<String, dynamic> json) {
     return CartModel(
       items: (json['items'] as List<dynamic>?)
-              ?.map((e) => SongModel.fromMap(e as Map<String, dynamic>))
+              ?.map((e) => SongModel.fromMapCache(e as Map<String, dynamic>))
               .toList() ??
           [],
     );
