@@ -6,24 +6,18 @@ import 'package:musify_app/core/exceptions/app_exception.dart';
 import 'package:musify_app/modules/songs/domain/entities/feed.dart';
 import 'package:musify_app/modules/songs/domain/entities/song.dart';
 import 'package:musify_app/modules/songs/domain/usecases/songs_usecase.dart';
-import 'package:musify_app/routes/app_routes.dart';
-import 'package:musify_app/services/navigation/navigation_service.dart';
 
 part 'songs_event.dart';
 part 'songs_state.dart';
 
 class SongsBloc extends Bloc<SongsEvent, SongsState> {
   final SongsUseCase useCase;
-  final NavigationService navigationService;
 
-  SongsBloc({required this.useCase, required this.navigationService})
-      : super(SongsState.initial()) {
+  SongsBloc({required this.useCase}) : super(SongsState.initial()) {
     on<FetchSongs>(_onFetchSongs);
     on<RefreshSongs>(_onRefreshSongs);
     on<PlaySong>(_onPlaySong);
     on<SelectSong>(_onSelectSong);
-    on<OpenCart>(_openCart);
-    on<Clearcart>(_clearCart);
   }
 
   Future<void> _onFetchSongs(FetchSongs event, Emitter<SongsState> emit) async {
@@ -72,15 +66,5 @@ class SongsBloc extends Bloc<SongsEvent, SongsState> {
 
   void _onSelectSong(SelectSong event, Emitter<SongsState> emit) {
     emit(state.copyWith(selectedSong: event.song));
-    navigationService.navigateToNamed(AppRoutes.songDetailsScreen);
-  }
-
-  void _openCart(OpenCart event, Emitter<SongsState> emit) {
-    navigationService.navigateToNamed(AppRoutes.cartScreen);
-  }
-
-  void _clearCart(Clearcart event, Emitter<SongsState> emit) {
-    navigationService.back();
-    emit(state.copyWith(cart: []));
   }
 }

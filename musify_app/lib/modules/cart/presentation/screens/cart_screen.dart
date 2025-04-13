@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:musify_app/core/exceptions/app_exception.dart';
 import 'package:musify_app/core/extentions/buildcontect_extention.dart';
 import 'package:musify_app/core/theme/app_text_style.dart';
@@ -8,6 +9,7 @@ import 'package:musify_app/modules/songs/domain/entities/song.dart';
 import 'package:musify_app/modules/songs/presentation/bloc/songs_bloc.dart';
 import 'package:musify_app/modules/songs/presentation/widgets/cart_summery.dart';
 import 'package:musify_app/modules/songs/presentation/widgets/song_tile.dart';
+import 'package:musify_app/routes/app_routes.dart';
 import 'package:musify_app/widgets/buttons/bouncing_button.dart';
 import 'package:musify_app/widgets/snackbar/app_flash.dart';
 

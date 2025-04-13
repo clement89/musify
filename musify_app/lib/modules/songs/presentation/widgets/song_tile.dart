@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:musify_app/core/extentions/buildcontect_extention.dart';
 import 'package:musify_app/modules/cart/presentation/bloc/cart_bloc.dart';
 import 'package:musify_app/modules/songs/domain/entities/song.dart';
 import 'package:musify_app/modules/songs/presentation/bloc/songs_bloc.dart';
+import 'package:musify_app/routes/app_routes.dart';
 
 class SongTile extends StatelessWidget {
   final Song song;
@@ -26,6 +28,7 @@ class SongTile extends StatelessWidget {
         return ListTile(
           onTap: () {
             context.read<SongsBloc>().add(SelectSong(song));
+            context.push(AppRoutes.songDetailsScreen);
           },
           leading: Image.network(
             song.albumUrl,

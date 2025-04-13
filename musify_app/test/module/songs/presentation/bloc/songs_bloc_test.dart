@@ -6,24 +6,17 @@ import 'package:musify_app/modules/songs/domain/entities/feed.dart';
 import 'package:musify_app/modules/songs/domain/entities/song.dart';
 import 'package:musify_app/modules/songs/domain/usecases/songs_usecase.dart';
 import 'package:musify_app/modules/songs/presentation/bloc/songs_bloc.dart';
-import 'package:musify_app/routes/app_routes.dart';
-import 'package:musify_app/services/navigation/navigation_service.dart';
 
 class MockSongsUseCase extends Mock implements SongsUseCase {}
-
-class MockNavigationService extends Mock implements NavigationService {}
 
 void main() {
   late SongsBloc songsBloc;
   late MockSongsUseCase mockSongsUseCase;
-  late MockNavigationService mockNavigationService;
 
   setUp(() {
     mockSongsUseCase = MockSongsUseCase();
-    mockNavigationService = MockNavigationService();
     songsBloc = SongsBloc(
       useCase: mockSongsUseCase,
-      navigationService: mockNavigationService,
     );
   });
 
@@ -114,21 +107,6 @@ void main() {
       expect: () => [
         SongsState.initial().copyWith(selectedSong: mockSong),
       ],
-      verify: (_) {
-        verify(() => mockNavigationService
-            .navigateToNamed(AppRoutes.songDetailsScreen)).called(1);
-      },
-    );
-
-    blocTest<SongsBloc, SongsState>(
-      'navigates to cart screen when OpenCart is called',
-      build: () => songsBloc,
-      act: (bloc) => bloc.add(const OpenCart()),
-      verify: (_) {
-        verify(() =>
-                mockNavigationService.navigateToNamed(AppRoutes.cartScreen))
-            .called(1);
-      },
     );
   });
 }

@@ -10,10 +10,10 @@ import 'package:musify_app/modules/cart/domain/usecases/cart_usecases.dart';
 import 'package:musify_app/modules/cart/presentation/bloc/cart_bloc.dart';
 import 'package:musify_app/modules/songs/domain/usecases/songs_usecase.dart';
 import 'package:musify_app/modules/songs/presentation/bloc/songs_bloc.dart';
-import 'package:musify_app/routes/app_routes.dart';
+import 'package:musify_app/modules/splash/presentation/bloc/splash_bloc.dart';
 import 'package:musify_app/routes/routes.dart';
-import 'package:musify_app/services/navigation/navigation_service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:musify_app/services/storage/storage_service.dart';
 
 class MusifyApp extends StatelessWidget {
   const MusifyApp({super.key});
@@ -28,10 +28,14 @@ class MusifyApp extends StatelessWidget {
             BlocProvider<ThemeCubit>(
               create: (_) => ThemeCubit(),
             ),
+            BlocProvider(
+              create: (_) => SplashBloc(
+                storageService: locator<StorageService>(),
+              )..add(SplashStarted()),
+            ),
             BlocProvider<SongsBloc>(
               create: (_) => SongsBloc(
                 useCase: locator<SongsUseCase>(),
-                navigationService: locator<NavigationService>(),
               ),
             ),
             BlocProvider<CartBloc>(
@@ -39,7 +43,6 @@ class MusifyApp extends StatelessWidget {
                 cartUsecases: locator<CartUsecases>(),
               ),
             ),
-
             // Add other BlocProviders here if needed
           ],
           child: MediaQuery(
@@ -47,15 +50,13 @@ class MusifyApp extends StatelessWidget {
                 .copyWith(textScaler: const TextScaler.linear(1.0)),
             child: BlocBuilder<ThemeCubit, ThemeMode>(
               builder: (context, themeMode) {
-                return MaterialApp(
+                return MaterialApp.router(
                   title: AppConstants.appName,
                   debugShowCheckedModeBanner: false,
                   themeMode: themeMode,
                   theme: AppTheme.light,
                   darkTheme: AppTheme.dark,
-                  navigatorKey: locator<NavigationService>().navigatorKey,
-                  initialRoute: AppRoutes.splashScreen,
-                  onGenerateRoute: (settings) => Routes.generateRoute(settings),
+                  routerConfig: router,
                   supportedLocales: AppLocalizations.supportedLocales,
                   localizationsDelegates: const [
                     GlobalMaterialLocalizations.delegate,

@@ -2,8 +2,10 @@ import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart' show Colors, IconButton, Icons;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:musify_app/modules/cart/presentation/bloc/cart_bloc.dart';
 import 'package:musify_app/modules/songs/presentation/bloc/songs_bloc.dart';
+import 'package:musify_app/routes/app_routes.dart';
 
 class CartIcon extends StatelessWidget {
   const CartIcon({super.key});
@@ -22,7 +24,7 @@ class CartIcon extends StatelessWidget {
           child: IconButton(
             icon: const Icon(Icons.shopping_cart),
             onPressed: () {
-              context.read<SongsBloc>().add(const OpenCart());
+              context.push(AppRoutes.cartScreen);
             },
           ),
         );

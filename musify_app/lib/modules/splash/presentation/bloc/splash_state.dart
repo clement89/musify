@@ -1,11 +1,21 @@
 part of 'splash_bloc.dart';
 
 @immutable
-sealed class SplashState extends Equatable {
-  const SplashState();
+class SplashState extends Equatable {
+  final bool loadComplete;
+  const SplashState({required this.loadComplete});
 
   @override
-  List<Object> get props => [];
-}
+  List<Object> get props => [loadComplete];
 
-final class SplashInitial extends SplashState {}
+  factory SplashState.initial() {
+    return const SplashState(loadComplete: false);
+  }
+  SplashState copyWith({
+    bool? loadComplete,
+  }) {
+    return SplashState(
+      loadComplete: loadComplete ?? this.loadComplete,
+    );
+  }
+}
