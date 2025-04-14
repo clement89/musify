@@ -50,6 +50,7 @@ dependencies:
   mocktail: ^1.0.4
   bloc_test: ^10.0.0
   go_router: ^14.8.1
+  mocktail_image_network: ^1.2.0
   
 
 dev_dependencies:

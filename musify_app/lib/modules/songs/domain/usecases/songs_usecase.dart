@@ -35,4 +35,13 @@ class SongsUseCase {
       throw AppException.unexpected;
     }
   }
+
+  /// Stop the currently playing song
+  Future<void> stopSong() async {
+    try {
+      await _audioService.stop();
+    } catch (e) {
+      throw AppException.unexpected;
+    }
+  }
 }

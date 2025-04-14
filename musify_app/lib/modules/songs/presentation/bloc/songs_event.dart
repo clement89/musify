@@ -36,12 +36,3 @@ class SelectSong extends SongsEvent {
   @override
   List<Object> get props => [song];
 }
-
-// Event to refresh the song list (if needed)
-class OpenCart extends SongsEvent {
-  const OpenCart();
-}
-
-class Clearcart extends SongsEvent {
-  const Clearcart();
-}

@@ -20,7 +20,7 @@ class CartRepoImpl implements CartRepository {
   @override
   void updateCartRepo({required Cart cart}) {
     try {
-      _dataSource.updatedCart(cartModel: cart as CartModel);
+      _dataSource.updatedCart(cartModel: CartModel.fromEntity(cart));
     } catch (e) {
       rethrow;
     }

@@ -25,6 +25,7 @@ class SongsBloc extends Bloc<SongsEvent, SongsState> {
 
     try {
       final result = await useCase.fetchFeedsFromRepo();
+
       emit(state.copyWith(status: Status.loaded, feed: result));
     } on AppException catch (e) {
       emit(state.copyWith(status: Status.error, error: e));
@@ -52,10 +53,11 @@ class SongsBloc extends Bloc<SongsEvent, SongsState> {
   /// Handle playing a song
   Future<void> _onPlaySong(PlaySong event, Emitter<SongsState> emit) async {
     try {
-      if (state.status == Status.playing) {
+      if (state.status == Status.playing && state.currentSong == event.song) {
         await useCase.pauseSong();
         emit(state.copyWith(status: Status.paused));
       } else {
+        await useCase.stopSong();
         useCase.playSong(event.song);
         emit(state.copyWith(status: Status.playing, currentSong: event.song));
       }

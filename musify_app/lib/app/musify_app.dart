@@ -36,7 +36,7 @@ class MusifyApp extends StatelessWidget {
             BlocProvider<SongsBloc>(
               create: (_) => SongsBloc(
                 useCase: locator<SongsUseCase>(),
-              ),
+              )..add(const FetchSongs()),
             ),
             BlocProvider<CartBloc>(
               create: (_) => CartBloc(

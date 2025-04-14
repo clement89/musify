@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musify_app/core/extentions/buildcontect_extention.dart';
 import 'package:musify_app/core/theme/app_text_style.dart';
+import 'package:musify_app/modules/cart/presentation/bloc/cart_bloc.dart';
 import 'package:musify_app/modules/songs/domain/entities/song.dart';
-import 'package:musify_app/modules/songs/presentation/bloc/songs_bloc.dart';
 
 class CartSummary extends StatelessWidget {
   final List<Song> cart;
@@ -37,7 +37,7 @@ class CartSummary extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            context.read<SongsBloc>().add(const Clearcart());
+            context.read<CartBloc>().add(const ClearCart());
             Navigator.pop(context, true);
           },
           child: Text(context.loc.done),
