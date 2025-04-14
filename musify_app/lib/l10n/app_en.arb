@@ -14,5 +14,6 @@
     "cartSummery": "Cart Summary",
     "cancel": "Cancel",
     "done": "Done",
-    "checkout": "Checkout"
+    "checkout": "Checkout",
+    "noItemsFound": "No Items Found"
 }

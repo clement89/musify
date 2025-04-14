@@ -18,30 +18,36 @@ class CartSummary extends StatelessWidget {
         context.loc.cartSummery,
         style: AppTextStyles.kTitle.copyWith(color: colors.textColor),
       ),
-      content: SizedBox(
-        width: double.maxFinite,
-        child: ListView.builder(
-          shrinkWrap: true,
-          itemCount: cart.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(cart[index].title),
-            );
-          },
-        ),
-      ),
+      content: cart.isEmpty
+          ? Text(
+              context.loc.noItemsFound,
+              style: AppTextStyles.kSubTitle.copyWith(color: colors.textColor),
+            )
+          : SizedBox(
+              width: double.maxFinite,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: cart.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(cart[index].title),
+                  );
+                },
+              ),
+            ),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
           child: Text(context.loc.cancel),
         ),
-        TextButton(
-          onPressed: () {
-            context.read<CartBloc>().add(const ClearCart());
-            Navigator.pop(context, true);
-          },
-          child: Text(context.loc.done),
-        ),
+        if (cart.isNotEmpty)
+          TextButton(
+            onPressed: () {
+              context.read<CartBloc>().add(const ClearCart());
+              Navigator.pop(context, true);
+            },
+            child: Text(context.loc.done),
+          ),
       ],
     );
   }
